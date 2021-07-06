@@ -54,57 +54,58 @@
 
                 <?php
                 if (isset($_SESSION["rank"]) && $_SESSION["rank"] >= $config["lobbyPermission"]) {
-                    ?>
-                    <li class="nav-header">Freigabe</li>
-                    <li class="nav-item">
-                        <a href="?s=approveAction" class="nav-link">
-                            <i class="nav-icon fas fa-users-cog"></i>
-                            <p>Aktionen freigeben</p>
-                        </a>
-                    </li>
-                    </li>
-                    <?
+                    echo '
+						<li class="nav-header">Freigabe</li>
+							<li class="nav-item">
+								<a href="?s=approveAction" class="nav-link">
+									<i class="nav-icon fas fa-users-cog"></i>
+									<p>Aktionen freigeben</p>
+								</a>
+							</li>
+						</li>
+					';
                 }
                 ?>
 
                 <?php
                 if (isset($_SESSION["rank"]) && $_SESSION["rank"] >= $config["leaderarea"]) {
-                    ?>
-                    <li class="nav-header">Leaderarea</li>
-                    <li class="nav-item">
-                        <a href="?s=userStats" class="nav-link">
-                            <i class="nav-icon fas fa-user-tag"></i>
-                            <p>Beteiligungsliste</p>
-                        </a>
-                    </li>
-					<li class="nav-item">
-                        <a href="?s=stats" class="nav-link">
-                            <i class="nav-icon fas fa-chart-line"></i>
-                            <p>Statistik</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="?s=storage" class="nav-link">
-                            <i class="nav-icon fas fa-archive"></i>
-                            <p>Lager</p>
-                        </a>
-                    </li>
-                    </li>
+                    echo '
+						<li class="nav-header">Leaderarea</li>
+							<li class="nav-item">
+								<a href="?s=userStats" class="nav-link">
+									<i class="nav-icon fas fa-user-tag"></i>
+									<p>Beteiligungsliste</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="?s=stats" class="nav-link">
+									<i class="nav-icon fas fa-chart-line"></i>
+									<p>Statistik</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="?s=storage" class="nav-link">
+									<i class="nav-icon fas fa-archive"></i>
+									<p>Lager</p>
+								</a>
+							</li>
+						</li>
 
-                    <li class="nav-header">User Verwaltung</li>
-                    <li class="nav-item">
-                        <a href="?s=createUser" class="nav-link">
-                            <i class="nav-icon fas fa-user-plus"></i>
-                            <p>User erstellen</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="?s=manageUser" class="nav-link">
-                            <i class="nav-icon fas fa-user-cog"></i>
-                            <p>User bearbeiten</p>
-                        </a>
-                    </li>
-                    <?
+						<li class="nav-header">User Verwaltung</li>
+							<li class="nav-item">
+								<a href="?s=createUser" class="nav-link">
+									<i class="nav-icon fas fa-user-plus"></i>
+									<p>User erstellen</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="?s=manageUser" class="nav-link">
+									<i class="nav-icon fas fa-user-cog"></i>
+									<p>User bearbeiten</p>
+								</a>
+							</li>
+						</li>
+					';
                 }
                 ?>
             </ul>
