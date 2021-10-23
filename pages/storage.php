@@ -71,10 +71,69 @@ if (isset($_POST["deleteSell"])) {
     </div>
 </div>
 
+<div class="col-xl-5 col-lg-5">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Kassensturz</h6>
+        </div>
+        <div class="card-body">
+            <div class="col-lg-12 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <?php
+                            $query = $connection->prepare("SELECT SUM(`cash`) as `sells` FROM `sells`");
+                            $query->execute();
+
+                            while ($result = $query->fetch(PDO::FETCH_OBJ)) {
+                                $sells = $result->sells;
+                                echo '<h3>'.number_format($result->sells, 0, ".", ".").'$</h3>';
+                            }
+                        ?>
+                        <p>Einnahmen</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                </div>
+
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <?php
+                        $query = $connection->prepare("SELECT SUM(`cash`) as `buys` FROM `buys`");
+                        $query->execute();
+
+                        while ($result = $query->fetch(PDO::FETCH_OBJ)) {
+                            $buys = $result->buys;
+                            echo '<h3>'.number_format($result->buys, 0, ".", ".").'$</h3>';
+                        }
+                        ?>
+                        <p>Augaben</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                </div>
+
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3><?php echo number_format($sells - $buys, 0, ".", ".")."$"; ?></h3>
+
+                        <p>Gewinn</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-money-bill"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="col-xl-6 col-lg-7">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Lager Logs (Einlagern)</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Lager Logs (gekauft)</h6>
         </div>
         <div class="card-body">
 			<form method="POST">
@@ -94,7 +153,7 @@ if (isset($_POST["deleteSell"])) {
 							while ($result = $query->fetch(PDO::FETCH_OBJ)) {
 								echo '
 									<tr>
-										<td>'.getNameFromId($result->user).' hat am '.date("d.m.Y", strtotime($result->date)).' um '.date("H:i", strtotime($result->date)).' Uhr '.$result->amount.' x '.$result->item.' ('.number_format($result->cash, 0, ".", ".").') eingelagert.</td>
+										<td>'.getNameFromId($result->user).' hat am '.date("d.m.Y", strtotime($result->date)).' um '.date("H:i", strtotime($result->date)).' Uhr '.$result->amount.' x '.$result->item.' ('.number_format($result->cash, 0, ".", ".").') gekauft.</td>
 										<td><button class="btn btn-danger" name="deleteBuy" value='.$result->id.'>Löschen</button></td>
 									</tr>
 								';
@@ -111,7 +170,7 @@ if (isset($_POST["deleteSell"])) {
 <div class="col-xl-6 col-lg-7">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Lager Logs (Auslagern)</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Lager Logs (verkauft)</h6>
         </div>
         <div class="card-body">
 			<form method="POST">
@@ -131,7 +190,7 @@ if (isset($_POST["deleteSell"])) {
 							while ($result = $query->fetch(PDO::FETCH_OBJ)) {
 								echo '
 									<tr>
-										<td>'.getNameFromId($result->user).' hat am '.date("d.m.Y", strtotime($result->date)).' um '.date("H:i", strtotime($result->date)).' Uhr '.$result->amount.' x '.$result->item.' ('.number_format($result->cash, 0, ".", ".").') ausgelagert.</td>
+										<td>'.getNameFromId($result->user).' hat am '.date("d.m.Y", strtotime($result->date)).' um '.date("H:i", strtotime($result->date)).' Uhr '.$result->amount.' x '.$result->item.' ('.number_format($result->cash, 0, ".", ".").') verkauft.</td>
 										<td><button class="btn btn-danger" name="deleteSell" value='.$result->id.'>Löschen</button></td>
 									</tr>
 								';
