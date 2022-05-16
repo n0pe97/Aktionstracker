@@ -227,6 +227,24 @@ function getCorrectActionName($name)
 	}
 }
 
+function redirect($url)
+{
+    if (!headers_sent())
+    {    
+        header('Location: '.$url);
+        exit;
+        }
+    else
+        {  
+        echo '<script type="text/javascript">';
+        echo 'window.location.href="'.$url.'";';
+        echo '</script>';
+        echo '<noscript>';
+        echo '<meta http-equiv="refresh:3" content="0;url='.$url.'" />';
+        echo '</noscript>'; exit;
+    }
+}
+
 function checkLogin($username, $password)
 {
     if ($username && $password) {
@@ -248,7 +266,7 @@ function checkLogin($username, $password)
 
 					echo('<div class="alert alert-success alert-dismissible"><h6 class="alert-heading">Erfolgreich!</h6>Du wirst in kürze weitergeleitet!</div>');
 
-					header("refresh:3;url=index.php?s=home");
+					redirect("index.php?s=home");
 				} else {
 					echo('<div class="alert alert-danger alert-dismissible"><h6 class="alert-heading">Fehler!</h6>Das Passwort stimmt nicht!</div>');
 				}
